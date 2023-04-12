@@ -13,9 +13,11 @@ def similarity_evaluation(req,doc,seuil):
                 liste.append((i,j,prod_vectors))
     return liste
 
-def liste_to_doc(data,filename):
+def liste_to_fichier(data):
     line=""
-    for i in range(0,len(data)):
-        line = data[i][0]+"  "+data[i][1]+"  "+data[i][2]+"\n"
+    with open("reponse_requete.txt","w") as f:
+        for i in range(0,len(data)):
+            line = line + data[i][0]+"  "+data[i][1]+"  "+data[i][2]+"\n"
+            f.write(line)
     
         
