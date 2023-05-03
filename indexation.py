@@ -81,17 +81,29 @@ vocabulary = vectorizer.get_feature_names()
 # Transformer la matrice TF-IDF en une liste de vecteurs
 article_vectors = tfidf_matrix.toarray()
 
-print(tfidf_matrix[0])
+print(len(article_vectors))
+
+
+# vectors = []
+# article_vector = []
+# vector_string = ''
+# for i, article in enumerate(filtered_articles):
+#     for j, weight in enumerate(article_vectors[i]):
+#         if weight > 0:
+#             word = vocabulary[j]
+#             vector_string += f'{word}: {weight}, '
+#             vectors.append(vector_string)
+
 
 
 #création du doc csv
 
-vectors = [["abeille : 8", "rouge : 2",  "carré : 2"], ["arbre : 6", "blanc : 2", "grand : 4"], ["manger : 4", "plat : 6", "courir : 4"]]
-indice = 0
-
-with open('vectors.csv', 'w', newline='') as file:
-    writer = csv.writer(file)
-    for vector in vectors:
-        indice = indice + 1
-        case = ['doc : '+str(indice)]
-        writer.writerow(case + vector)
+# vectors = [["abeille : 8", "rouge : 2",  "carré : 2"], ["arbre : 6", "blanc : 2", "grand : 4"], ["manger : 4", "plat : 6", "courir : 4"]]
+# indice = 0
+#
+# with open('vectors.csv', 'w', newline='') as file:
+#     writer = csv.writer(file)
+#     for vector in vectors:
+#         indice = indice + 1
+#         case = ['doc : '+str(indice)]
+#         writer.writerow(case + vector)
