@@ -1,15 +1,20 @@
 import numpy as np
-from nltk.corpus import wordnet as wn
 
+from nltk.corpus import wordnet
+
+def expand_query(vocab_query):
+    expanded_query = []
+    for term in vocab_queryquery:
+        expanded_query.append(term)  # Ajouter le terme d'origine
+        synonyms = set()
+        for syn in wordnet.synsets(term):
+                synonyms.add(syn)
+        expanded_query.extend(list(synonyms))  # Ajouter les synonymes
+    return expanded_query
 
 # on veut enrichir la requête : tout les mot (nom,verb,adj, pas adrv), trouvé les synonym et leur donner un poid (le même ?)
 #https://www.nltk.org/howto/wordnet.html
 #https://www.geeksforgeeks.org/nlp-synsets-for-a-word-in-wordnet/
-
-def indexation_query():
-    print("ouais")
-def preprocess_query():
-    print("preprocess_query")
 
 def enrichissement_requete():
     #apres tfidf ou après tokenisation
