@@ -51,8 +51,11 @@ if __name__ == '__main__':
     # Transformer la matrice TF-IDF des requêtes en une liste de vecteurs
     requete_vectors = tfidf_matrixReq.toarray()
 
+    for i in range(0,4):
+        document_vectors[i]+=1
+
     print(len(requete_vectors[0]))
 
-    listeResultat = recherche.similarity_evaluation(requete_vectors,document_vectors, 0.12)
+    listeResultat = recherche.similarity_evaluation(requete_vectors,document_vectors, 0.1)
     print(listeResultat[0])
     recherche.liste_to_fichier(listeResultat)
