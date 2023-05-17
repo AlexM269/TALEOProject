@@ -38,7 +38,7 @@ if __name__ == '__main__':
     vocabulary = list(set(vocabulary_doc + voc))
 
     # Créer un nouvel objet TfidfVectorizer avec le vocabulaire combiné
-    vectorizer_combined = TfidfVectorizer(vocabulary=vocabulary, ngram_range=(1,3), smooth_idf=False)
+    vectorizer_combined = TfidfVectorizer(vocabulary=vocabulary, ngram_range=(1,2))
 
     # Calculer les poids TF-IDF pour chaque mot dans les documents
     tfidf_matrixDoc = vectorizer_combined.fit_transform(listeDocument)
@@ -56,6 +56,6 @@ if __name__ == '__main__':
 
     print(len(requete_vectors[0]))
 
-    listeResultat = recherche.similarity_evaluation(requete_vectors,document_vectors, 0.12)
+    listeResultat = recherche.similarity_evaluation(requete_vectors,document_vectors, 0.13)
     print(listeResultat[0])
     recherche.liste_to_fichier(listeResultat)
