@@ -53,6 +53,6 @@ if __name__ == '__main__':
 
     print(len(requete_vectors[0]))
 
-    listeResultat = recherche.similarity_evaluation(requete_vectors,document_vectors, 0.15)
+    listeResultat = recherche.similarity_evaluation(requete_vectors,document_vectors, 0.12)
     print(listeResultat[0])
     recherche.liste_to_fichier(listeResultat)
