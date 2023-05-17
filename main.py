@@ -33,9 +33,9 @@ if __name__ == '__main__':
     vectorizer_req.fit_transform(listeRequete)
     # Obtenir le vocabulaire des requêtes
     vocabulary_req = vectorizer_req.get_feature_names()
-    voc = recherche.expand_query(vocabulary_req)
+    #voc = recherche.expand_query(vocabulary_req)
     # Concaténer les deux vocabulaires sans doublons
-    vocabulary = list(set(vocabulary_doc + voc))
+    vocabulary = list(set(vocabulary_doc + vocabulary_req))
 
     # Créer un nouvel objet TfidfVectorizer avec le vocabulaire combiné
     vectorizer_combined = TfidfVectorizer(vocabulary=vocabulary)
