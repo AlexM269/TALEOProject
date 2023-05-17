@@ -37,7 +37,7 @@ def liste_to_fichier(data):
     with open("reponse_requete.txt","w") as f:
         for i in range(0,len(data)):
             line = ""
-            line = line + str(data[i][0])+"  "+str(data[i][1])+"  "+str(data[i][2])+"\n"
+            line = line + str(data[i][0]+1)+"  "+str(data[i][1])+"  "+str(data[i][2])+"\n"
             f.write(line)
 
     
