@@ -52,8 +52,7 @@ if __name__ == '__main__':
     requete_vectors = tfidf_matrixReq.toarray()
 
     print(len(requete_vectors[0]))
-    print(len(document_vectors[0]))
 
-    listeResultat = recherche.similarity_evaluation(requete_vectors,document_vectors, 0)
+    listeResultat = recherche.similarity_evaluation(requete_vectors,document_vectors, 0.5)
     print(listeResultat[0])
     recherche.liste_to_fichier(listeResultat)

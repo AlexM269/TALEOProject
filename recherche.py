@@ -4,7 +4,7 @@ from nltk.corpus import wordnet
 
 def expand_query(vocab_query):
     expanded_query = []
-    for term in vocab_queryquery:
+    for term in vocab_query:
         expanded_query.append(term)  # Ajouter le terme d'origine
         synonyms = set()
         for syn in wordnet.synsets(term):
