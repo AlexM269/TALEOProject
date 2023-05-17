@@ -38,7 +38,7 @@ if __name__ == '__main__':
     vocabulary = list(set(vocabulary_doc + voc))
 
     # Créer un nouvel objet TfidfVectorizer avec le vocabulaire combiné
-    vectorizer_combined = TfidfVectorizer(vocabulary=vocabulary, ngram_range=(1,2))
+    vectorizer_combined = TfidfVectorizer(vocabulary=vocabulary, ngram_range=(1,2), lowercase=False)
 
     # Calculer les poids TF-IDF pour chaque mot dans les documents
     tfidf_matrixDoc = vectorizer_combined.fit_transform(listeDocument)
