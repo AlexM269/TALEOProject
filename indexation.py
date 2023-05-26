@@ -88,13 +88,14 @@ def tf(vocabulaire,doc):
     return tf
 def idf(vocabulaire,list_doc):
     idf = []
-    a = 1 #lissage
+
     for mot in vocabulaire :
+        a = 1
         for doc in list_doc :
             if mot in doc :
-                a=a+1
-        idf.append(math.log(10,len(list_doc)/a))
-        a=1
+                a = a+1
+        idf.append(math.log(len(list_doc)/a,10))
+
     return idf
 
 def tf_idf(vocabulaire,list_doc) :
@@ -104,6 +105,7 @@ def tf_idf(vocabulaire,list_doc) :
         term_f = tf(vocabulaire,doc)
         temp = numpy.dot(inverse,term_f)
         tfidf.append(temp)
+    print(tfidf)
     return tfidf
 
 # # Initialiser le vecteuriseur TF-IDF
