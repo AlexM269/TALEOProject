@@ -1,6 +1,7 @@
 import string
 import csv
-
+import numpy
+import math
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -57,7 +58,8 @@ def vectorizeFile(file):
                 liste_mots_sans_ponctuation.append(mot)
         # Supprimez les mots très communs de la langue anglaise
         for mot in liste_mots_sans_ponctuation :
-            if mot.lower() not in stop_words :
+            mot = mot.lower()
+            if mot not in stop_words :
                 liste_mots_sans_stopwords.append(mot)
         # Mettez à jour la liste de mots dans le tableau
         filtered_articles.append(liste_mots_sans_stopwords)
@@ -71,7 +73,38 @@ def vectorizeFile(file):
 
     print(preprocessed_articles[0])
 
-    return preprocessed_articles
+    return filtered_articles
+
+
+def tf(vocabulaire,doc):
+    tf=[]
+    a=0
+    for mot in vocabulaire :
+        for term in doc :
+            if mot == term :
+                a=a+1
+        tf.append(a/len(doc))
+        a=0
+    return tf
+def idf(vocabulaire,list_doc):
+    idf = []
+    a = 1 #lissage
+    for mot in vocabulaire :
+        for doc in list_doc :
+            if mot in doc :
+                a=a+1
+        idf.append(math.log(10,len(list_doc)/a))
+        a=1
+    return idf
+
+def tf_idf(vocabulaire,list_doc) :
+    tfidf = []
+    inverse= idf(vocabulaire,list_doc)
+    for doc in list_doc :
+        term_f = tf(vocabulaire,doc)
+        temp = numpy.dot(inverse,term_f)
+        tfidf.append(temp)
+    return tfidf
 
 # # Initialiser le vecteuriseur TF-IDF
 # vectorizer = TfidfVectorizer()

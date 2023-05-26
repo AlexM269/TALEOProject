@@ -16,9 +16,6 @@ def expand_query(vocab_query):
 #https://www.nltk.org/howto/wordnet.html
 #https://www.geeksforgeeks.org/nlp-synsets-for-a-word-in-wordnet/
 
-def enrichissement_requete():
-    #apres tfidf ou après tokenisation
-    print("")
 
 #Création d'une liste de vecteur de similarité entre deux vecteurs requète et document à partir d'un seuil de similarité
 def similarity_evaluation(req,doc,seuil):
