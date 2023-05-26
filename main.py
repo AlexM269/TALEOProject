@@ -24,7 +24,6 @@ if __name__ == '__main__':
         for mot in doc :
             if mot not in vocabulaire :
                 vocabulaire.append(mot)
-    print(len(vocabulaire))
     for query in listeRequete:
         for mot in query:
             if mot not in vocabulaire :
@@ -33,6 +32,9 @@ if __name__ == '__main__':
     #tfidf des doc et des requetes
     requete_vectors = indexation.tf_idf(vocabulaire, listeRequete)
     document_vectors = indexation.tf_idf(vocabulaire, listeDocument)
+    print(len(requete_vectors[1]))
+    print(len(document_vectors[1]))
+    print(len(vocabulaire))
 
 
     # for i in range(0,4):
@@ -40,6 +42,6 @@ if __name__ == '__main__':
     #
     # print(len(requete_vectors[0]))
 
-    listeResultat = recherche.similarity_evaluation(requete_vectors,document_vectors, 0.5)
+    listeResultat = recherche.similarity_evaluation(requete_vectors,document_vectors, 0.12)
     print(listeResultat[0])
     recherche.liste_to_fichier(listeResultat)

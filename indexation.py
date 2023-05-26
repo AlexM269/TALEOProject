@@ -101,11 +101,15 @@ def idf(vocabulaire,list_doc):
 def tf_idf(vocabulaire,list_doc) :
     tfidf = []
     inverse= idf(vocabulaire,list_doc)
+    print(len(inverse))
     for doc in list_doc :
         term_f = tf(vocabulaire,doc)
-        temp = numpy.dot(inverse,term_f)
+        temp = []
+        for i in range(0,len(vocabulaire)) :
+            temp.append(term_f[i]*inverse[i])
         tfidf.append(temp)
-    print(tfidf)
+    print(len(term_f))
+
     return tfidf
 
 # # Initialiser le vecteuriseur TF-IDF
