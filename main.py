@@ -19,15 +19,8 @@ if __name__ == '__main__':
     listeRequete = indexation.vectorizeFile(fileRequete)
     listeDocument = indexation.vectorizeFile(fileDocument)
     #création du vocabulaire
-    vocabulaire =[]
-    for doc in listeDocument :
-        for mot in doc :
-            if mot not in vocabulaire :
-                vocabulaire.append(mot)
-    for query in listeRequete:
-        for mot in query:
-            if mot not in vocabulaire :
-                vocabulaire.append(mot)
+    vocabulaire =recherche.vocabulaire(listeDocument, listeRequete)
+    print(vocabulaire[0:3])
 
     #tfidf des doc et des requetes
     requete_vectors = indexation.tf_idf(vocabulaire, listeRequete)

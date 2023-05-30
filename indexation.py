@@ -78,13 +78,13 @@ def vectorizeFile(file):
 
 def tf(vocabulaire,doc):
     tf=[]
-    a=0
+    a=1
     for mot in vocabulaire :
         for term in doc :
             if mot == term :
                 a=a+1
-        tf.append(a/len(doc))
-        a=0
+        tf.append(a/len(doc)-1)
+        a=1
     return tf
 def idf(vocabulaire,list_doc):
     idf = []
@@ -101,52 +101,14 @@ def idf(vocabulaire,list_doc):
 def tf_idf(vocabulaire,list_doc) :
     tfidf = []
     inverse= idf(vocabulaire,list_doc)
-    print(len(inverse))
+    print(inverse[0:3])
     for doc in list_doc :
         term_f = tf(vocabulaire,doc)
         temp = []
         for i in range(0,len(vocabulaire)) :
             temp.append(term_f[i]*inverse[i])
         tfidf.append(temp)
-    print(len(term_f))
+    print(term_f[0:3])
+    print(tfidf[len(tfidf)-1][0:3])
 
     return tfidf
-
-# # Initialiser le vecteuriseur TF-IDF
-# vectorizer = TfidfVectorizer()
-#
-# # Calculer les poids TF-IDF pour chaque mot dans les articles
-# tfidf_matrix = vectorizer.fit_transform(preprocessed_articles)
-#
-# # Obtenir les mots du vocabulaire (i.e., les mots présents dans les articles)
-# vocabulary = vectorizer.get_feature_names()
-#
-# # Transformer la matrice TF-IDF en une liste de vecteurs
-# article_vectors = tfidf_matrix.toarray()
-#
-# print(len(article_vectors[0]))
-
-
-# vectors = []
-# article_vector = []
-# vector_string = ''
-# for i, article in enumerate(filtered_articles):
-#     for j, weight in enumerate(article_vectors[i]):
-#         if weight > 0:
-#             word = vocabulary[j]
-#             vector_string += f'{word}: {weight}, '
-#             vectors.append(vector_string)
-
-
-
-#création du doc csv
-
-# vectors = [["abeille : 8", "rouge : 2",  "carré : 2"], ["arbre : 6", "blanc : 2", "grand : 4"], ["manger : 4", "plat : 6", "courir : 4"]]
-# indice = 0
-#
-# with open('vectors.csv', 'w', newline='') as file:
-#     writer = csv.writer(file)
-#     for vector in vectors:
-#         indice = indice + 1
-#         case = ['doc : '+str(indice)]
-#         writer.writerow(case + vector)

@@ -37,5 +37,16 @@ def liste_to_fichier(data):
             line = line + str(data[i][0]+1)+"  "+str(data[i][1])+"  "+str(data[i][2])+"\n"
             f.write(line)
 
-    
+
+def vocabulaire(listeDocument, listeRequete):
+    vocabulary = []
+    for doc in listeDocument :
+        for mot in doc :
+            if mot not in vocabulary :
+                vocabulary.append(mot)
+    for query in listeRequete:
+        for mot in query:
+            if mot not in vocabulary :
+                vocabulary.append(mot)
+    return vocabulary
         
