@@ -84,8 +84,8 @@ def tf(vocabulaire,doc):
         i=0
         for term in doc :
             if mot == term :
-                if i<5:
-                    a=a+1
+                if i<4:
+                    a=a+4
                 a=a+1
                 i=i+1
         tf.append(a/(len(doc)-1))
@@ -111,7 +111,7 @@ def tf_idf(vocabulaire,list_doc) :
         term_f = tf(vocabulaire,doc)
         temp = []
         for i in range(0,len(vocabulaire)) :
-            temp.append(term_f[i]*inverse[i])
+            temp.append(term_f[i]*(inverse[i]+0.1))
         tfidf.append(temp)
     test = tf(vocabulaire,list_doc[0])
     print(test[0:3])
