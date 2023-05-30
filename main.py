@@ -25,15 +25,6 @@ if __name__ == '__main__':
     #tfidf des doc et des requetes
     requete_vectors = indexation.tf_idf(vocabulaire, listeRequete)
     document_vectors = indexation.tf_idf(vocabulaire, listeDocument)
-    print(len(requete_vectors[1]))
-    print(len(document_vectors[1]))
-    print(len(vocabulaire))
-
-
-    # for i in range(0,4):
-    #     document_vectors[i]+=1
-    #
-    # print(len(requete_vectors[0]))
 
     listeResultat = recherche.similarity_evaluation(requete_vectors,document_vectors, 0.12)
     #print(listeResultat[0])

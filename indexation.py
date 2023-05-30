@@ -78,13 +78,13 @@ def vectorizeFile(file):
 
 def tf(vocabulaire,doc):
     tf=[]
-    a=1
+    a=0
     for mot in vocabulaire :
         for term in doc :
             if mot == term :
                 a=a+1
-        tf.append(a/len(doc)-1)
-        a=1
+        tf.append(a/(len(doc)-1))
+        a=0
     return tf
 def idf(vocabulaire,list_doc):
     idf = []
@@ -108,7 +108,8 @@ def tf_idf(vocabulaire,list_doc) :
         for i in range(0,len(vocabulaire)) :
             temp.append(term_f[i]*inverse[i])
         tfidf.append(temp)
-    print(term_f[0:3])
-    print(tfidf[len(tfidf)-1][0:3])
+    test = tf(vocabulaire,list_doc[0])
+    print(test[0:3])
+    print(tfidf[0][0:3])
 
     return tfidf

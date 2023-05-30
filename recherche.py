@@ -8,7 +8,8 @@ def expand_query(vocab_query):
         expanded_query.append(term)  # Ajouter le terme d'origine
         synonyms = set()
         for syn in wordnet.synsets(term):
-                synonyms.add(syn)
+                #synonyms.add(syn)
+                synonyms.update(syn.lemma_names())  # Ajouter les mots des objets Synset
         expanded_query.extend(list(synonyms))  # Ajouter les synonymes
     return expanded_query
 
@@ -42,10 +43,6 @@ def vocabulaire(listeDocument, listeRequete):
     vocabulary = []
     for doc in listeDocument :
         for mot in doc :
-            if mot not in vocabulary :
-                vocabulary.append(mot)
-    for query in listeRequete:
-        for mot in query:
             if mot not in vocabulary :
                 vocabulary.append(mot)
     return vocabulary
