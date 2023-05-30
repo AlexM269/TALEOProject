@@ -5,7 +5,7 @@ from nltk.corpus import wordnet
 def expand_query(vocab_query):
     expanded_query = []
     for term in vocab_query:
-        expanded_query.append(term)  # Ajouter le terme d'origine
+        #expanded_query.append(term)  # Ajouter le terme d'origine
         synonyms = set()
         for syn in wordnet.synsets(term):
                 #synonyms.add(syn)
@@ -35,12 +35,17 @@ def liste_to_fichier(data):
     with open("reponse_requete.txt","w") as f:
         for i in range(0,len(data)):
             line = ""
-            line = line + str(data[i][0]+1)+"  "+str(data[i][1])+"  "+str(data[i][2])+"\n"
+            line = line + str(data[i][0]+1)+"  "+str(data[i][1]+1)+"  "+str(data[i][2])+"\n"
             f.write(line)
 
 
 def vocabulaire(listeDocument, listeRequete):
     vocabulary = []
+    for doc in listeRequete:
+        for mot in doc :
+            if mot not in vocabulary :
+                vocabulary.append(mot)
+    vocabulary = expand_query(vocabulary)
     for doc in listeDocument :
         for mot in doc :
             if mot not in vocabulary :

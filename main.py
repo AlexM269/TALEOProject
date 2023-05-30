@@ -20,12 +20,13 @@ if __name__ == '__main__':
     listeDocument = indexation.vectorizeFile(fileDocument)
     #création du vocabulaire
     vocabulaire =recherche.vocabulaire(listeDocument, listeRequete)
-    print(vocabulaire[0:3])
+    print(vocabulaire[0:9])
+    print(len(vocabulaire))
 
     #tfidf des doc et des requetes
     requete_vectors = indexation.tf_idf(vocabulaire, listeRequete)
     document_vectors = indexation.tf_idf(vocabulaire, listeDocument)
 
-    listeResultat = recherche.similarity_evaluation(requete_vectors,document_vectors, 0.12)
+    listeResultat = recherche.similarity_evaluation(requete_vectors,document_vectors, 0.11)
     #print(listeResultat[0])
     recherche.liste_to_fichier(listeResultat)

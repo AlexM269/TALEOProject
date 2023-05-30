@@ -94,7 +94,7 @@ def idf(vocabulaire,list_doc):
         for doc in list_doc :
             if mot in doc :
                 a = a+1
-        idf.append(math.log(len(list_doc)/a,10))
+        idf.append(math.log(len(list_doc)/(a),10))
 
     return idf
 
