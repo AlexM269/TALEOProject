@@ -41,11 +41,11 @@ def liste_to_fichier(data):
 
 def vocabulaire(listeDocument, listeRequete):
     vocabulary = []
-    for doc in listeRequete:
-        for mot in doc :
-            if mot not in vocabulary :
-                vocabulary.append(mot)
-    vocabulary = expand_query(vocabulary)
+    # for doc in listeRequete:
+    #     for mot in doc :
+    #         if mot not in vocabulary :
+    #             vocabulary.append(mot)
+    # vocabulary = expand_query(vocabulary)
     for doc in listeDocument :
         for mot in doc :
             if mot not in vocabulary :

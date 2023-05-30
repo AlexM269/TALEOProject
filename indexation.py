@@ -79,10 +79,15 @@ def vectorizeFile(file):
 def tf(vocabulaire,doc):
     tf=[]
     a=0
+    i=0
     for mot in vocabulaire :
+        i=0
         for term in doc :
             if mot == term :
+                if i<5:
+                    a=a+1
                 a=a+1
+                i=i+1
         tf.append(a/(len(doc)-1))
         a=0
     return tf
