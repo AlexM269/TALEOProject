@@ -193,13 +193,10 @@ def tf_idf(vocabulaire,list_doc) :
     inverse= squaredIdf(vocabulaire,list_doc)
     print(inverse[0:3])
     for doc in list_doc :
-        term_f = tf(vocabulaire,doc)
+        term_f = squaredTf(vocabulaire,doc)
         temp = []
         for i in range(0,len(vocabulaire)) :
-            temp.append(term_f[i]*(inverse[i]+0.1))
+            temp.append(term_f[i]*(inverse[i]))
         tfidf.append(temp)
-    test = tf(vocabulaire,list_doc[0])
-    print(test[0:3])
-    print(tfidf[0][0:3])
 
     return tfidf
