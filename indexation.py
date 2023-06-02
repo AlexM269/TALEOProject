@@ -150,7 +150,7 @@ def squaredTf(vocabulaire,doc):
         i = 0
         for term in doc:
             if mot == term:
-                if i < 4:
+                if i < 3:
                     a = a + 4
                 a = a + 1
                 i = i + 1
@@ -193,7 +193,7 @@ def tf_idf(vocabulaire,list_doc) :
     inverse= squaredIdf(vocabulaire,list_doc)
     print(inverse[0:3])
     for doc in list_doc :
-        term_f = squaredTf(vocabulaire,doc)
+        term_f = augmentedNormalizeTf(vocabulaire,doc)
         temp = []
         for i in range(0,len(vocabulaire)) :
             temp.append(term_f[i]*(inverse[i]))
