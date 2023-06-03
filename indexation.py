@@ -204,7 +204,7 @@ def tf_idf(vocabulaire,list_doc) :
         norm = normalisation(term_f, inverse)
         temp = []
         for i in range(0,len(vocabulaire)) :
-            temp.append(term_f[i]*(inverse[i])*norm)
+            temp.append(term_f[i]*(inverse[i]))
         tfidf.append(temp)
 
     return tfidf
