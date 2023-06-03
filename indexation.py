@@ -188,15 +188,23 @@ def squaredIdf(vocabulaire, list_doc):
         idf2.append((math.log(len(list_doc) / (a), 10))*(math.log(len(list_doc) / (a), 10)))
     return idf2
 
+def normalisation(tf_vector, idf_vector):
+    temp = 0
+    for i in range (0,len(tf_vector)):
+        temp = temp + tf_vector[i]*idf_vector[i]
+
+    return temp
+
 def tf_idf(vocabulaire,list_doc) :
     tfidf = []
     inverse= squaredIdf(vocabulaire,list_doc)
     print(inverse[0:3])
     for doc in list_doc :
         term_f = augmentedNormalizeTf(vocabulaire,doc)
+        norm = normalisation(term_f, inverse)
         temp = []
         for i in range(0,len(vocabulaire)) :
-            temp.append(term_f[i]*(inverse[i]))
+            temp.append(term_f[i]*(inverse[i])*norm)
         tfidf.append(temp)
 
     return tfidf
