@@ -79,74 +79,132 @@ def vectorizeFile(file):
 def tf(vocabulaire,doc):
     tf=[]
     a=0
+    i=0
     for mot in vocabulaire :
+        i=0
         for term in doc :
             if mot == term :
+                if i<4:
+                    a=a+4
                 a=a+1
-        tf.append(a/len(doc))
+                i=i+1
+        tf.append(a/(len(doc)-1))
         a=0
     return tf
+
+def normalizedTf(vocabulaire, doc):
+    tfTemp = tf(vocabulaire,doc)
+    maxTf = max(tfTemp)
+    tf1 = []
+    for term in tfTemp :
+        tf1.append(term/maxTf)
+
+    return tf1
+
+def augmentedNormalizeTf(vocabulaire, doc):
+    tfTemp = normalizedTf(vocabulaire,doc)
+    tf2 = []
+    for term in tfTemp :
+        if term == 0 :
+            tf2.append(0)
+        else :
+            tf2.append(0.5 + 0.5*term)
+    return tf2
+
+def logarithmTf(vocabulaire, doc) :
+    # tfTemp = tf(vocabulaire, doc)
+    # tf3 = []
+    # for term in tfTemp :
+    #     if term == 0 :
+    #         tf3.append(0)
+    #     else :
+    #         tf3.append(math.log(term,10)+1)
+    tf3 = []
+    a = 0
+    i = 0
+    for mot in vocabulaire:
+        i = 0
+        for term in doc:
+            if mot == term:
+                if i < 4:
+                    a = a + 4
+                a = a + 1
+                i = i + 1
+        if a == 0:
+            tf3.append(0)
+        else:
+            tf3.append(math.log(a / (len(doc) - 1),10)+1)
+        a = 0
+    return tf3
+
+def squaredTf(vocabulaire,doc):
+    # tfTemp = tf(vocabuaire, doc)
+    # tf4 = []
+    # for term in tfTemp :
+    #     tf4.append(term*term)
+    # return tf4
+    tf4 = []
+    a = 0
+    i = 0
+    for mot in vocabulaire:
+        i = 0
+        for term in doc:
+            if mot == term:
+                if i < 3:
+                    a = a + 4
+                a = a + 1
+                i = i + 1
+        tf4.append((a / (len(doc) - 1))*(a / (len(doc) - 1)))
+        a = 0
+    return tf4
+
 def idf(vocabulaire,list_doc):
     idf = []
-
     for mot in vocabulaire :
         a = 1
         for doc in list_doc :
             if mot in doc :
                 a = a+1
-        idf.append(math.log(len(list_doc)/a,10))
-
+        idf.append(math.log(len(list_doc)/(a),10))
     return idf
+
+def probabilisticIdf(vocabulaire, list_doc):
+    idf1 = []
+    for mot in vocabulaire:
+        a = 1
+        for doc in list_doc:
+            if mot in doc:
+                a = a + 1
+        idf1.append(math.log((len(list_doc)-a) / (a), 10))
+    return idf1
+
+def squaredIdf(vocabulaire, list_doc):
+    idf2 = []
+    for mot in vocabulaire:
+        a = 1
+        for doc in list_doc:
+            if mot in doc:
+                a = a + 1
+        idf2.append((math.log(len(list_doc) / (a), 10))*(math.log(len(list_doc) / (a), 10)))
+    return idf2
+
+def normalisation(tf_vector, idf_vector):
+    temp = 0
+    for i in range (0,len(tf_vector)):
+        temp = temp + tf_vector[i]*idf_vector[i]
+
+    return temp
 
 def tf_idf(vocabulaire,list_doc) :
     tfidf = []
-    inverse= idf(vocabulaire,list_doc)
-    print(len(inverse))
+    inverse= squaredIdf(vocabulaire,list_doc)
+    print(inverse[0:3])
     for doc in list_doc :
-        term_f = tf(vocabulaire,doc)
+        term_f = augmentedNormalizeTf(vocabulaire,doc)
+        norm = normalisation(term_f, inverse)
         temp = []
         for i in range(0,len(vocabulaire)) :
-            temp.append(term_f[i]*inverse[i])
+            temp.append(term_f[i]*(inverse[i]))
         tfidf.append(temp)
-    print(len(term_f))
 
     return tfidf
-
-# # Initialiser le vecteuriseur TF-IDF
-# vectorizer = TfidfVectorizer()
-#
-# # Calculer les poids TF-IDF pour chaque mot dans les articles
-# tfidf_matrix = vectorizer.fit_transform(preprocessed_articles)
-#
-# # Obtenir les mots du vocabulaire (i.e., les mots présents dans les articles)
-# vocabulary = vectorizer.get_feature_names()
-#
-# # Transformer la matrice TF-IDF en une liste de vecteurs
-# article_vectors = tfidf_matrix.toarray()
-#
-# print(len(article_vectors[0]))
-
-
-# vectors = []
-# article_vector = []
-# vector_string = ''
-# for i, article in enumerate(filtered_articles):
-#     for j, weight in enumerate(article_vectors[i]):
-#         if weight > 0:
-#             word = vocabulary[j]
-#             vector_string += f'{word}: {weight}, '
-#             vectors.append(vector_string)
-
-
-
-#création du doc csv
-
-# vectors = [["abeille : 8", "rouge : 2",  "carré : 2"], ["arbre : 6", "blanc : 2", "grand : 4"], ["manger : 4", "plat : 6", "courir : 4"]]
-# indice = 0
-#
-# with open('vectors.csv', 'w', newline='') as file:
-#     writer = csv.writer(file)
-#     for vector in vectors:
-#         indice = indice + 1
-#         case = ['doc : '+str(indice)]
-#         writer.writerow(case + vector)
